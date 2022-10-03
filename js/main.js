@@ -15,3 +15,11 @@ function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 getRandomIntInclusive(2, 5);
+
+//Функция для проверки максимальной длины строки
+
+function getLength(description, length) {
+  return description.length <= length;
+}
+
+getLength('Текстовый комментарий', 140);
