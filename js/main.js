@@ -52,7 +52,7 @@ const DESCRIPTION_COUNT = 25;
 
 const ID_ARRAY = getListElements(25);
 
-const CREATE_PHOTO_DESCRIPTION = () => ({
+const createPhotoDescription = () => ({
   id: getRandomArrayElement(ID_ARRAY),
   url: getUrl(ID_ARRAY),
   description: 'Красивая фотография',
@@ -60,10 +60,10 @@ const CREATE_PHOTO_DESCRIPTION = () => ({
   comments: getRandomIntInclusive(0, 200)
 });
 
-CREATE_PHOTO_DESCRIPTION();
+createPhotoDescription();
 
 //Сохраняла код ниже (Array.from...) в константу PHOTO_DESCRIPTION, но ESlint всё время ругается,
 //что она не используется, но если её вывести в консоль, снова начинает ругаться
 Array.from({
   length: DESCRIPTION_COUNT
-}, CREATE_PHOTO_DESCRIPTION);
+}, createPhotoDescription);
