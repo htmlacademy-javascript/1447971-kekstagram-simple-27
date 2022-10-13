@@ -49,13 +49,14 @@ function getUrl(array) {
 const getRandomArrayElement = (elements) => elements[getRandomIntInclusive(0, elements.length - 1)];
 
 const DESCRIPTION_COUNT = 25;
+const DESRIPTIONS = ['Красивая фотография', 'Не очень получилось', 'Можно было и получше сделать', 'Очень хороший кадр', 'Вау, вот это красота'];
 
 const ID_ARRAY = getListElements(25);
 
 const createPhotoDescription = () => ({
   id: getRandomArrayElement(ID_ARRAY),
   url: getUrl(ID_ARRAY),
-  description: 'Красивая фотография',
+  description: getRandomArrayElement(DESRIPTIONS),
   likes: getRandomIntInclusive(15, 200),
   comments: getRandomIntInclusive(0, 200)
 });
