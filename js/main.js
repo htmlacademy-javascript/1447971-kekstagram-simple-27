@@ -35,16 +35,6 @@ function getListElements(counter) {
   return newArray;
 }
 
-
-//адрес картинки
-
-function getUrl(array) {
-  let url = '';
-  const rand = Math.floor(Math.random() * array.length);
-  url = `photos/${array[rand]}.jpg`;
-  return url;
-}
-
 //даёт одно значение из массива. НЕ ЗНАЮ, КАК СДЕЛАТЬ, ЧТОБЫ НЕ ПОВТОРЯЛОСЬ ЗНАЧЕНИЕ
 const getRandomArrayElement = (elements) => elements[getRandomIntInclusive(0, elements.length - 1)];
 
@@ -55,7 +45,7 @@ const ID_ARRAY = getListElements(25);
 
 const createPhotoDescription = () => ({
   id: getRandomArrayElement(ID_ARRAY),
-  url: getUrl(ID_ARRAY),
+  url: `photos/${getRandomArrayElement(ID_ARRAY)}.jpg`,
   description: getRandomArrayElement(DESRIPTIONS),
   likes: getRandomIntInclusive(15, 200),
   comments: getRandomIntInclusive(0, 200)
