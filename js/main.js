@@ -1,8 +1,8 @@
 //Функцию взяла с сайта https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 
 function getRandomIntInclusive(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
+  min = Math.ceil(Math.min(min, max));
+  max = Math.floor(Math.max(min, max));
   if (typeof min !== 'number' || typeof max !== 'number' || min < 0 || max < 0) {
     return NaN;
   }
@@ -23,3 +23,38 @@ function getLength(description, length) {
 }
 
 getLength('Текстовый комментарий', 140);
+
+
+//массив случайной длины из значений, значения не повторяются
+function getListElements(counter) {
+  const newArray = [];
+  for (let i = 1; i <= counter; i++) {
+    const newElem = i;
+    newArray.push(newElem);
+  }
+  return newArray;
+}
+
+//даёт одно значение из массива. НЕ ЗНАЮ, КАК СДЕЛАТЬ, ЧТОБЫ НЕ ПОВТОРЯЛОСЬ ЗНАЧЕНИЕ
+const getRandomArrayElement = (elements) => elements[getRandomIntInclusive(0, elements.length - 1)];
+
+const DESCRIPTION_COUNT = 25;
+const DESRIPTIONS = ['Красивая фотография', 'Не очень получилось', 'Можно было и получше сделать', 'Очень хороший кадр', 'Вау, вот это красота'];
+
+const ID_ARRAY = getListElements(25);
+
+const createPhotoDescription = () => ({
+  id: getRandomArrayElement(ID_ARRAY),
+  url: `photos/${getRandomArrayElement(ID_ARRAY)}.jpg`,
+  description: getRandomArrayElement(DESRIPTIONS),
+  likes: getRandomIntInclusive(15, 200),
+  comments: getRandomIntInclusive(0, 200)
+});
+
+createPhotoDescription();
+
+//Сохраняла код ниже (Array.from...) в константу PHOTO_DESCRIPTION, но ESlint всё время ругается,
+//что она не используется, но если её вывести в консоль, снова начинает ругаться
+Array.from({
+  length: DESCRIPTION_COUNT
+}, createPhotoDescription);
