@@ -6,9 +6,12 @@ const form = document.querySelector('.img-upload__form');
 const openUploadFileButton = form.querySelector('.img-upload__input');
 const closeUploaFiledButton = form.querySelector('.img-upload__cancel');
 const imgUploadOverlay = form.querySelector('.img-upload__overlay');
+const commentField = document.querySelector('.text__description');
+
+const isTextFocused = () => document.activeElement === commentField;
 
 const onUploadFilEscKeyDown = (evt) => {
-  if (isEscapeKey(evt)) {
+  if (isEscapeKey(evt) && !isTextFocused()) {
     evt.preventDefault();
     closeUploadFile();
     document.removeEventListener('keydown', onUploadFilEscKeyDown);
