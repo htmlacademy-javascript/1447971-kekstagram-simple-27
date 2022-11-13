@@ -32,7 +32,10 @@ function getListElements(counter) {
 //даёт одно значение из массива. НЕ ЗНАЮ, КАК СДЕЛАТЬ, ЧТОБЫ НЕ ПОВТОРЯЛОСЬ ЗНАЧЕНИЕ
 const getRandomArrayElement = (elements) => elements[getRandomIntInclusive(0, elements.length - 1)];
 
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
 export {getRandomIntInclusive};
 export {getLength};
 export {getListElements};
 export {getRandomArrayElement};
+export {isEscapeKey};
