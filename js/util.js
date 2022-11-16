@@ -18,22 +18,25 @@ const getLength = (description, length) => description.length <= length;
 
 getLength('Текстовый комментарий', 140);
 
-const getListElements = (counter) => {
-  const newArray = [];
-  for (let i = 1; i <= counter; i++) {
-    const newElem = i;
-    newArray.push(newElem);
-  }
-  return newArray;
-};
+function createRandomIdFromRangeGenerator (min, max) {
+  const previousValues = [];
 
-//даёт одно значение из массива. НЕ ЗНАЮ, КАК СДЕЛАТЬ, ЧТОБЫ НЕ ПОВТОРЯЛОСЬ ЗНАЧЕНИЕ
-const getRandomArrayElement = (elements) => elements[getRandomIntInclusive(0, elements.length - 1)];
+  return function () {
+    let currentValue = getRandomIntInclusive(min, max);
+    if (previousValues.length >= (max - min + 1)) {
+      return null;
+    }
+    while (previousValues.includes(currentValue)) {
+      currentValue = getRandomIntInclusive(min, max);
+    }
+    previousValues.push(currentValue);
+    return currentValue;
+  };
+}
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
 export {getRandomIntInclusive};
 export {getLength};
-export {getListElements};
-export {getRandomArrayElement};
 export {isEscapeKey};
+export {createRandomIdFromRangeGenerator};
