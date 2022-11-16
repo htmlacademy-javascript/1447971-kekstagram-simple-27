@@ -1,15 +1,17 @@
 import {getRandomIntInclusive} from './util.js';
-import {getRandomArrayElement} from './util.js';
-import {getListElements} from './util.js';
+import {createRandomIdFromRangeGenerator} from './util.js';
 
 const DESCRIPTION_COUNT = 25;
 const DESRIPTIONS = ['Красивая фотография', 'Не очень получилось', 'Можно было и получше сделать', 'Очень хороший кадр', 'Вау, вот это красота'];
-const ID_ARRAY = getListElements(25);
+
+const generatePhotoId = createRandomIdFromRangeGenerator(1, DESCRIPTION_COUNT);
+const generatePhotoURL = createRandomIdFromRangeGenerator(1, DESCRIPTION_COUNT);
+const generatePhoDescription = createRandomIdFromRangeGenerator(1, DESCRIPTION_COUNT);
 
 const createPhotoDescription = () => ({
-  id: getRandomArrayElement(ID_ARRAY),
-  url: `photos/${getRandomArrayElement(ID_ARRAY)}.jpg`,
-  description: getRandomArrayElement(DESRIPTIONS),
+  id: generatePhotoId(),
+  url: `photos/${generatePhotoURL()}.jpg`,
+  description: generatePhoDescription(DESRIPTIONS),
   likes: getRandomIntInclusive(15, 200),
   comments: getRandomIntInclusive(0, 200)
 });

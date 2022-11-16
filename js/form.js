@@ -1,4 +1,6 @@
 import {isEscapeKey} from './util.js';
+import { resetScale } from './scale-img.js';
+import {resetEffect} from './effect-img.js';
 
 //Загрузка изображения
 
@@ -25,6 +27,9 @@ function openUploadFile() {
 }
 
 function closeUploadFile() {
+  form.reset();
+  resetScale();
+  resetEffect();
   imgUploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onUploadFilEscKeyDown);
