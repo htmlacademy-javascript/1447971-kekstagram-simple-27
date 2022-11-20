@@ -4,6 +4,7 @@ import './form.js';
 import './scale-img.js';
 import './effect-img.js';
 import {createPictures} from './thumbnails.js';
+import {setFormSubmit, closeUploadFile} from './form.js';
 
 //createPhotoDescriptions();
 
@@ -37,3 +38,5 @@ fetch('https://27.javascript.pages.academy/kekstagram-simple/data')
   .then((pictures) => {
     createPictures(pictures);
   });
+
+setFormSubmit(closeUploadFile);

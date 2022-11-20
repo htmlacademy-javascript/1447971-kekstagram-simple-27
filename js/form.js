@@ -38,3 +38,25 @@ function closeUploadFile() {
 openUploadFileButton.addEventListener('change', () => openUploadFile());
 
 closeUploaFiledButton.addEventListener('click', () => closeUploadFile());
+
+////////////////новое
+
+const setFormSubmit = (onSuccess) => {
+  form.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    const formData = new FormData(evt.target);
+
+    fetch(
+      'https://27.javascript.pages.academy/kekstagram-simple',
+      {
+        method: 'POST',
+        body: formData,
+      },
+    ).then(() => onSuccess());
+  });
+};
+
+export {setFormSubmit};
+
+export {openUploadFile, closeUploadFile};
