@@ -7,14 +7,12 @@ import {
 import {
   resetEffect
 } from './effect-img.js';
-// import {
-//   showAlert
-// } from './util.js';
-
 import {
   sendData
 } from './api.js';
-import {showErrorModal} from './error-upload.js';
+import {
+  showErrorModal
+} from './error-upload.js';
 
 //Загрузка изображения
 

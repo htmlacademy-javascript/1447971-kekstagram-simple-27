@@ -1,4 +1,6 @@
-import { isEscapeKey } from './util.js';
+import {
+  isEscapeKey
+} from './util.js';
 
 const errorTemplateElement = document.querySelector('#error').content.querySelector('.error');
 const errorModalElement = errorTemplateElement.cloneNode(true);
@@ -19,7 +21,7 @@ const onErrorBackDropClick = (evt) => {
   }
 };
 
-function closeErrorMessageModal () {
+function closeErrorMessageModal() {
   document.removeEventListener('keydown', onErrorModalEscKeydown);
   document.removeEventListener('click', onErrorBackDropClick);
 
@@ -37,4 +39,6 @@ const showErrorModal = () => {
 
 };
 
-export {showErrorModal};
+export {
+  showErrorModal
+};

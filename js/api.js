@@ -1,6 +1,12 @@
-import {showAlert} from './util.js';
-import {showSuccessModal} from './success-upload.js';
-import {showErrorModal} from './error-upload.js';
+import {
+  showAlert
+} from './util.js';
+import {
+  showSuccessModal
+} from './success-upload.js';
+import {
+  showErrorModal
+} from './error-upload.js';
 
 const getData = (onSuccess) => {
   fetch('https://27.javascript.pages.academy/kekstagram-simple/data')
