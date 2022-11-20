@@ -1,6 +1,15 @@
-import {isEscapeKey} from './util.js';
-import { resetScale } from './scale-img.js';
-import {resetEffect} from './effect-img.js';
+import {
+  isEscapeKey
+} from './util.js';
+import {
+  resetScale
+} from './scale-img.js';
+import {
+  resetEffect
+} from './effect-img.js';
+import {
+  showAlert
+} from './util.js';
 
 //Загрузка изображения
 
@@ -48,15 +57,29 @@ const setFormSubmit = (onSuccess) => {
     const formData = new FormData(evt.target);
 
     fetch(
-      'https://27.javascript.pages.academy/kekstagram-simple',
-      {
+      'https://27.javascript.pages.academy/kekstagram-simple', {
         method: 'POST',
         body: formData,
       },
-    ).then(() => onSuccess());
+    )
+      .then((response) => {
+        if (response.ok) {
+          onSuccess();
+        } else {
+          showAlert('Не удалось отправить форму. Попробуйте ещё раз');
+        }
+      })
+      .catch(() => {
+        showAlert('Не удалось отправить форму. Попробуйте ещё раз');
+      });
   });
 };
 
-export {setFormSubmit};
+export {
+  setFormSubmit
+};
 
-export {openUploadFile, closeUploadFile};
+export {
+  openUploadFile,
+  closeUploadFile
+};
