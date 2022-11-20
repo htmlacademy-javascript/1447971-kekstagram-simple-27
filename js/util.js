@@ -20,7 +20,7 @@ getLength('Текстовый комментарий', 140);
 
 //Уникальное число
 
-function createRandomIdFromRangeGenerator (min, max) {
+function createRandomIdFromRangeGenerator(min, max) {
   const previousValues = [];
 
   return function () {
@@ -63,8 +63,18 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
-export {getRandomIntInclusive};
-export {getLength};
-export {isEscapeKey};
-export {createRandomIdFromRangeGenerator};
-export {showAlert};
+export {
+  getRandomIntInclusive
+};
+export {
+  getLength
+};
+export {
+  isEscapeKey
+};
+export {
+  createRandomIdFromRangeGenerator
+};
+export {
+  showAlert
+};

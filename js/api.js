@@ -8,8 +8,7 @@ const getData = (onSuccess) => {
 
 const sendData = (onSuccess, onFail, body) => {
   fetch(
-    'https://27.javascript.pages.academy/kekstagram-simple',
-    {
+    'https://27.javascript.pages.academy/kekstagram-simple', {
       method: 'POST',
       body,
     },
@@ -18,12 +17,15 @@ const sendData = (onSuccess, onFail, body) => {
       if (response.ok) {
         onSuccess();
       } else {
-        onFail('Не удалось отправить форму. Попробуйте ещё раз');
+        onFail('Не удалось отправить форму! Попробуйте ещё раз!');
       }
     })
     .catch(() => {
-      onFail('Не удалось отправить форму. Попробуйте ещё раз');
+      onFail('Не удалось отправить форму! Попробуйте ещё раз!');
     });
 };
 
-export {getData, sendData};
+export {
+  getData,
+  sendData
+};

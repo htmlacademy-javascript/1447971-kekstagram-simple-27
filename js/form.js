@@ -11,7 +11,9 @@ import {
   showAlert
 } from './util.js';
 
-import {sendData} from './api.js';
+import {
+  sendData
+} from './api.js';
 
 //Загрузка изображения
 
