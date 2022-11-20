@@ -52,8 +52,6 @@ openUploadFileButton.addEventListener('change', () => openUploadFile());
 
 closeUploaFiledButton.addEventListener('click', () => closeUploadFile());
 
-////////////////новое
-
 const setFormSubmit = (onSuccess) => {
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
