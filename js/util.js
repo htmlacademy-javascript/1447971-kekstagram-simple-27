@@ -64,17 +64,9 @@ const showAlert = (message) => {
 };
 
 export {
-  getRandomIntInclusive
-};
-export {
-  getLength
-};
-export {
-  isEscapeKey
-};
-export {
-  createRandomIdFromRangeGenerator
-};
-export {
+  getRandomIntInclusive,
+  getLength,
+  isEscapeKey,
+  createRandomIdFromRangeGenerator,
   showAlert
 };
