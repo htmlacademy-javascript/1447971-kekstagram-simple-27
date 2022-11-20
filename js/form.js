@@ -1,6 +1,18 @@
-import {isEscapeKey} from './util.js';
-import { resetScale } from './scale-img.js';
-import {resetEffect} from './effect-img.js';
+import {
+  isEscapeKey
+} from './util.js';
+import {
+  resetScale
+} from './scale-img.js';
+import {
+  resetEffect
+} from './effect-img.js';
+import {
+  sendData
+} from './api.js';
+import {
+  showErrorModal
+} from './error-upload.js';
 
 //Загрузка изображения
 
@@ -38,3 +50,24 @@ function closeUploadFile() {
 openUploadFileButton.addEventListener('change', () => openUploadFile());
 
 closeUploaFiledButton.addEventListener('click', () => closeUploadFile());
+
+const setFormSubmit = (onSuccess) => {
+  form.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    sendData(
+      () => onSuccess(),
+      () => showErrorModal(),
+      new FormData(evt.target),
+    );
+  });
+};
+
+export {
+  setFormSubmit
+};
+
+export {
+  openUploadFile,
+  closeUploadFile
+};

@@ -1,19 +1,25 @@
-import {createPhotoDescriptions} from './data.js';
+const pictureList = document.querySelector('.pictures');
 
-const BLOG_PICTURE = document.querySelector('.pictures');
+const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
-const TEMPLATE_PICTURE = document.querySelector('#picture').content.querySelector('.picture');
+const pictureFragment = document.createDocumentFragment();
 
-const USER_PICTURES = createPhotoDescriptions();
+const createPictures = (pictures) => {
+  pictures.forEach(({
+    url,
+    likes,
+    comments
+  }) => {
+    const pictureElement = pictureTemplate.cloneNode(true);
+    pictureElement.querySelector('.picture__img').src = url;
+    pictureElement.querySelector('.picture__likes').textContent = likes;
+    pictureElement.querySelector('.picture__comments').textContent = comments.length;
+    pictureFragment.appendChild(pictureElement);
+  });
 
-const PICTURE_FRAGMENT = document.createDocumentFragment();
+  pictureList.appendChild(pictureFragment);
+};
 
-USER_PICTURES.forEach(({url, likes, comments}) => {
-  const PICTURE_ELEMENT = TEMPLATE_PICTURE.cloneNode(true);
-  PICTURE_ELEMENT.querySelector('.picture__img').src = url;
-  PICTURE_ELEMENT.querySelector('.picture__likes').textContent = likes;
-  PICTURE_ELEMENT.querySelector('.picture__comments').textContent = comments.length;
-  PICTURE_FRAGMENT.appendChild(PICTURE_ELEMENT);
-});
-
-BLOG_PICTURE.appendChild(PICTURE_FRAGMENT);
+export {
+  createPictures
+};
