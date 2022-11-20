@@ -1,5 +1,6 @@
 import {showAlert} from './util.js';
 import {showSuccessModal} from './success-upload.js';
+import {showErrorModal} from './error-upload.js';
 
 const getData = (onSuccess) => {
   fetch('https://27.javascript.pages.academy/kekstagram-simple/data')
@@ -24,11 +25,11 @@ const sendData = (onSuccess, onFail, body) => {
         onSuccess();
         showSuccessModal();
       } else {
-        onFail('Не удалось отправить форму! Попробуйте ещё раз!');
+        onFail(showErrorModal());
       }
     })
     .catch(() => {
-      onFail('Не удалось отправить форму! Попробуйте ещё раз!');
+      onFail(showErrorModal());
     });
 };
 

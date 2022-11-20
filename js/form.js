@@ -7,13 +7,14 @@ import {
 import {
   resetEffect
 } from './effect-img.js';
-import {
-  showAlert
-} from './util.js';
+// import {
+//   showAlert
+// } from './util.js';
 
 import {
   sendData
 } from './api.js';
+import {showErrorModal} from './error-upload.js';
 
 //Загрузка изображения
 
@@ -58,7 +59,7 @@ const setFormSubmit = (onSuccess) => {
 
     sendData(
       () => onSuccess(),
-      () => showAlert('Не удалось отправить форму. Попробуйте ещё раз'),
+      () => showErrorModal(),
       new FormData(evt.target),
     );
   });
