@@ -11,6 +11,8 @@ import {
   showAlert
 } from './util.js';
 
+import {sendData} from './api.js';
+
 //Загрузка изображения
 
 const form = document.querySelector('.img-upload__form');
@@ -54,24 +56,11 @@ const setFormSubmit = (onSuccess) => {
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
-    const formData = new FormData(evt.target);
-
-    fetch(
-      'https://27.javascript.pages.academy/kekstagram-simple', {
-        method: 'POST',
-        body: formData,
-      },
-    )
-      .then((response) => {
-        if (response.ok) {
-          onSuccess();
-        } else {
-          showAlert('Не удалось отправить форму. Попробуйте ещё раз');
-        }
-      })
-      .catch(() => {
-        showAlert('Не удалось отправить форму. Попробуйте ещё раз');
-      });
+    sendData(
+      () => onSuccess(),
+      () => showAlert('Не удалось отправить форму. Попробуйте ещё раз'),
+      new FormData(evt.target),
+    );
   });
 };
 
