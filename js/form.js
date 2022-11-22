@@ -14,8 +14,6 @@ import {
   showErrorModal
 } from './error-upload.js';
 
-//Загрузка изображения
-
 const form = document.querySelector('.img-upload__form');
 const openUploadFileButton = form.querySelector('.img-upload__input');
 const closeUploaFiledButton = form.querySelector('.img-upload__cancel');

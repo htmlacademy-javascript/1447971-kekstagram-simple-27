@@ -18,8 +18,6 @@ const getLength = (description, length) => description.length <= length;
 
 getLength('Текстовый комментарий', 140);
 
-//Уникальное число
-
 function createRandomIdFromRangeGenerator(min, max) {
   const previousValues = [];
 
@@ -37,8 +35,6 @@ function createRandomIdFromRangeGenerator(min, max) {
 }
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
-
-//Показ ошибки
 
 const ALERT_SHOW_TIME = 5000;
 
