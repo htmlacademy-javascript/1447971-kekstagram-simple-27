@@ -8,8 +8,11 @@ import {
   showErrorModal
 } from './error-upload.js';
 
+const DATA_SERVER_TO_GET = 'https://27.javascript.pages.academy/kekstagram-simple/data';
+const DATA_SERVER_TO_SEND = 'https://27.javascript.pages.academy/kekstagram-simple';
+
 const getData = (onSuccess) => {
-  fetch('https://27.javascript.pages.academy/kekstagram-simple/data')
+  fetch(DATA_SERVER_TO_GET)
     .then((response) => response.json())
     .then((pictures) => {
       onSuccess(pictures);
@@ -21,7 +24,7 @@ const getData = (onSuccess) => {
 
 const sendData = (onSuccess, onFail, body) => {
   fetch(
-    'https://27.javascript.pages.academy/kekstagram-simple', {
+    DATA_SERVER_TO_SEND, {
       method: 'POST',
       body,
     },

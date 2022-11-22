@@ -14,13 +14,12 @@ import {
   showErrorModal
 } from './error-upload.js';
 
-//Загрузка изображения
-
 const form = document.querySelector('.img-upload__form');
 const openUploadFileButton = form.querySelector('.img-upload__input');
 const closeUploaFiledButton = form.querySelector('.img-upload__cancel');
 const imgUploadOverlay = form.querySelector('.img-upload__overlay');
 const commentField = document.querySelector('.text__description');
+const submitButton = document.querySelector('.img-upload__submit');
 
 const isTextFocused = () => document.activeElement === commentField;
 
@@ -51,13 +50,22 @@ openUploadFileButton.addEventListener('change', () => openUploadFile());
 
 closeUploaFiledButton.addEventListener('click', () => closeUploadFile());
 
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+};
+
 const setFormSubmit = (onSuccess) => {
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
+    blockSubmitButton();
 
     sendData(
-      () => onSuccess(),
-      () => showErrorModal(),
+      () => onSuccess(unblockSubmitButton()),
+      () => showErrorModal(unblockSubmitButton(), document.removeEventListener('keydown', onUploadFilEscKeyDown)),
       new FormData(evt.target),
     );
   });
