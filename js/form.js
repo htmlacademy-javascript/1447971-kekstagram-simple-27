@@ -67,7 +67,7 @@ const setFormSubmit = (onSuccess) => {
 
     sendData(
       () => onSuccess(unblockSubmitButton()),
-      () => showErrorModal(unblockSubmitButton()),
+      () => showErrorModal(unblockSubmitButton(), document.removeEventListener('keydown', onUploadFilEscKeyDown)),
       new FormData(evt.target),
     );
   });
