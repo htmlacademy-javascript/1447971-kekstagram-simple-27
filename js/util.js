@@ -12,11 +12,6 @@ const getRandomIntInclusive = (min, max) => {
 
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
-getRandomIntInclusive(2, 5);
-
-const getLength = (description, length) => description.length <= length;
-
-getLength('Текстовый комментарий', 140);
 
 function createRandomIdFromRangeGenerator(min, max) {
   const previousValues = [];
@@ -61,7 +56,6 @@ const showAlert = (message) => {
 
 export {
   getRandomIntInclusive,
-  getLength,
   isEscapeKey,
   createRandomIdFromRangeGenerator,
   showAlert
