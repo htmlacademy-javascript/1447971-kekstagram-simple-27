@@ -1,6 +1,9 @@
 import {
   isEscapeKey
 } from './util.js';
+import {
+  onUploadFilEscKeyDown
+} from './form.js';
 
 const errorTemplateElement = document.querySelector('#error').content.querySelector('.error');
 const errorModalElement = errorTemplateElement.cloneNode(true);
@@ -24,6 +27,7 @@ const onErrorBackDropClick = (evt) => {
 function closeErrorMessageModal() {
   document.removeEventListener('keydown', onErrorModalEscKeydown);
   document.removeEventListener('click', onErrorBackDropClick);
+  document.addEventListener('keydown', onUploadFilEscKeyDown);
 
   errorModalElement.remove();
 }
@@ -36,6 +40,7 @@ const showErrorModal = () => {
   document.addEventListener('keydown', onErrorModalEscKeydown);
   document.addEventListener('click', onErrorBackDropClick);
   errorButton.addEventListener('click', closeErrorMessageModal);
+  document.removeEventListener('keydown', onUploadFilEscKeyDown);
 
 };
 
