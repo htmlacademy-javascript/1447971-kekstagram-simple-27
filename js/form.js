@@ -13,6 +13,9 @@ import {
 import {
   showErrorModal
 } from './error-upload.js';
+import {
+  showSuccessModal
+} from './success-upload.js';
 
 const form = document.querySelector('.img-upload__form');
 const openUploadFileButton = form.querySelector('.img-upload__input');
@@ -64,18 +67,16 @@ const setFormSubmit = (onSuccess) => {
     blockSubmitButton();
 
     sendData(
-      () => onSuccess(unblockSubmitButton()),
-      () => showErrorModal(unblockSubmitButton(), document.removeEventListener('keydown', onUploadFilEscKeyDown)),
+      () => onSuccess(unblockSubmitButton(), closeUploadFile(), showSuccessModal()),
+      () => showErrorModal(unblockSubmitButton(), showErrorModal(), unblockSubmitButton()),
       new FormData(evt.target),
     );
   });
 };
 
 export {
-  setFormSubmit
-};
-
-export {
+  setFormSubmit,
   openUploadFile,
-  closeUploadFile
+  closeUploadFile,
+  onUploadFilEscKeyDown
 };
