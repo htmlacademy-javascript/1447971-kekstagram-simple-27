@@ -3,7 +3,7 @@ import {
 } from './util.js';
 
 const DATA_SERVER_TO_GET = 'https://27.javascript.pages.academy/kekstagram-simple/data';
-const DATA_SERVER_TO_SEND = 'https://27.javascript.pages.academy/404';
+const DATA_SERVER_TO_SEND = 'https://27.javascript.pages.academy/kekstagram-simple';
 
 const getData = (onSuccess) => {
   fetch(DATA_SERVER_TO_GET)
