@@ -4,9 +4,9 @@ import {
 import {
   resetScale
 } from './scale-img.js';
-import {
-  resetEffect
-} from './effect-img.js';
+// import {
+//   resetEffect
+// } from './effect-img.js';
 import {
   sendData
 } from './api.js';
@@ -43,7 +43,7 @@ function openUploadFile() {
 function closeUploadFile() {
   form.reset();
   resetScale();
-  resetEffect();
+  //resetEffect();
   imgUploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onUploadFilEscKeyDown);

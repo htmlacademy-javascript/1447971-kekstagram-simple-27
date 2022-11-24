@@ -1,120 +1,141 @@
 const imagePreview = document.querySelector('.img-upload__preview img');
 const form = document.querySelector('.img-upload__form');
-const sliderEffect = document.querySelector('.effect-level__slider');
-const sliderEffectValue = document.querySelector('.effect-level__value');
-
 const sliderContainer = document.querySelector('.img-upload__effect-level');
+const effectLevelValueElement = sliderContainer.querySelector('.effect-level__value');
+const sliderEffect = sliderContainer.querySelector('.effect-level__slider');
 
-
-const EFFECTS = [
-  {
-    name: 'none',
-    min: 0,
+const EFFECTS = {
+  'none': {
+    style: 'none',
+    unit: '',
+    min: 1,
     max: 100,
+    start: 100,
     step: 1
   },
-  {
-    name: 'chrome',
+
+  'chrome': {
     style: 'grayscale',
+    unit: '',
     min: 0,
     max: 1,
-    step: 0.1,
-    unit: ''
+    start: 100,
+    step: 0.1
   },
-  {
-    name: 'sepia',
+
+  'sepia': {
     style: 'sepia',
+    unit: '',
     min: 0,
     max: 1,
-    step: 0.1,
-    unit: ''
+    start: 1,
+    step: 0.1
   },
-  {
-    name: 'marvin',
+
+  'marvin': {
     style: 'invert',
+    unit: '%',
     min: 0,
     max: 100,
-    step: 1,
-    unit: '%'
+    start: 100,
+    step: 1
   },
-  {
-    name: 'phobos',
+
+  'phobos': {
     style: 'blur',
+    unit: 'px',
     min: 0,
     max: 3,
-    step: 0.1,
-    unit: 'px'
+    start: 3,
+    step: 0.1
   },
-  {
-    name: 'heat',
+
+  'heat': {
     style: 'brightness',
+    unit: '',
     min: 1,
     max: 3,
-    step: 0.1,
-    unit: ''
+    start: 3,
+    step: 0.1
   }
-];
+};
 
-const EFFECT_DAFAULT = EFFECTS[0];
-let chosenEffect = EFFECT_DAFAULT;
+const DEFAULT_EFFECT = 'none';
 
-const isDefault = () => chosenEffect === EFFECT_DAFAULT;
+let selectedEffect = EFFECTS.none;
 
-const updateSlider = () => {
+const applyEffectClass = (effectName) => {
+  const effectNames = Object.keys(EFFECTS);
+  const effectClasses = effectNames.map((className) => `effects__preview--${className}`);
+
+  imagePreview.classList.remove(...effectClasses);
+  imagePreview.classList.add(`effects__preview--${effectName}`);
+};
+
+const loadEffect = (effectName) => {
   sliderEffect.classList.remove('hidden');
-  sliderContainer.style.display = 'block';
-  sliderEffect.noUiSlider.updateOptions ({
+  //sliderContainer.style.display = 'block';
+  selectedEffect = EFFECTS[effectName];
+
+  sliderEffect.noUiSlider.updateOptions({
     range: {
-      min: chosenEffect.min,
-      max: chosenEffect.max
+      min: selectedEffect.min,
+      max: selectedEffect.max
     },
-    step: chosenEffect.step,
-    start: chosenEffect.max
+    step: selectedEffect.step,
+    start: selectedEffect.start
   });
-  if (isDefault()) {
-    sliderEffect.classList.add('hidden');
-    sliderContainer.style.display = 'none';
+
+  applyEffectClass(effectName);
+
+  // if (DEFAULT_EFFECT) {
+  //   sliderEffect.classList.add('hidden');
+  //   sliderContainer.style.display = 'none';
+  // }
+};
+
+const onEffectValueUpdate = () => {
+  if (selectedEffect.style === DEFAULT_EFFECT) {
+    sliderContainer.classList.add('hidden');
+    //sliderContainer.style.display = 'none';
+    imagePreview.style.filter = 'none';
+  } else {
+    sliderContainer.classList.remove('hidden');
+    //sliderContainer.style.display = 'block';
+    effectLevelValueElement.value = sliderEffect.noUiSlider.get();
+    imagePreview.style.filter = `${selectedEffect.style}(${effectLevelValueElement.value}${selectedEffect.unit})`;
   }
 };
 
-const onFormChange = (evt) => {
-  if (!evt.target.classList.contains('effects__radio')) {
-    return;
-  }
-  chosenEffect = EFFECTS.find((effect) => effect.name === evt.target.value);
-  updateSlider();
-};
+// const resetEffect = () => {
+//   selectedEffect = DEFAULT_EFFECT;
+//   onEffectValueUpdate();
+// };
 
-const onSliderUpdate = () => {
-  imagePreview.style.filter = 'none';
-  imagePreview.className = '';
-  sliderEffectValue.value = '';
-  if (isDefault()) {
-    return;
-  }
-  const sliderValue = sliderEffect.noUiSlider.get();
-  imagePreview.style.filter = `${chosenEffect.style}(${sliderValue}${chosenEffect.unit})`;
-  imagePreview.classList.add(`effects__preview--${chosenEffect.name}`);
-  sliderEffectValue.value = sliderValue;
-};
-
-const resetEffect = () => {
-  chosenEffect = EFFECT_DAFAULT;
-  updateSlider();
+const onTargetEffectChange = (evt) => {
+  loadEffect(evt.target.value);
 };
 
 noUiSlider.create(sliderEffect, {
   range: {
-    min: EFFECT_DAFAULT.min,
-    max:EFFECT_DAFAULT.max
+    min: 1,
+    max: 100,
   },
-  start: EFFECT_DAFAULT.max,
-  step: EFFECT_DAFAULT.step,
+  start: 100,
+  step: 1,
   connect: 'lower'
 });
-updateSlider();
 
-form.addEventListener('change', onFormChange);
-sliderEffect.noUiSlider.on('update', onSliderUpdate);
+onEffectValueUpdate();
+form.addEventListener('change', onTargetEffectChange);
+sliderEffect.noUiSlider.on('update', onEffectValueUpdate);
 
-export {resetEffect};
+
+// const destroySlider = () => {
+//   sliderEffect.noUiSlider.off('update');
+//   sliderEffect.noUiSlider.destroy();
+
+//   form.removeEventListener('change', onTargetEffectChange);
+// };
+
+//export {resetEffect};
