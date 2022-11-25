@@ -5,7 +5,8 @@ import {
   resetScale
 } from './scale-img.js';
 import {
-  resetEffect
+  createSlider,
+  destroySlider
 } from './effect-img.js';
 import {
   sendData
@@ -37,15 +38,16 @@ const onUploadFilEscKeyDown = (evt) => {
 function openUploadFile() {
   imgUploadOverlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
+  createSlider();
   document.addEventListener('keydown', onUploadFilEscKeyDown);
 }
 
 function closeUploadFile() {
   form.reset();
   resetScale();
-  resetEffect();
   imgUploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
+  destroySlider();
   document.removeEventListener('keydown', onUploadFilEscKeyDown);
 }
 
